@@ -1,6 +1,7 @@
 body{
   background-color: var(--bg);
-  color: #fff;
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 :root{
@@ -8,7 +9,16 @@ body{
   --bg2: #1F2937;
   --bg3: #374151;
   --bg4: #9333ea;
+  --text: #fff;
 } 
+
+body.light {
+  --bg: #f9fafb;
+  --bg2: #ffffff;
+  --bg3: #d1d5db;
+  --bg4: #7c3aed;
+  --text: #1f2937;
+}
 
 h2{
  font-size: 35px !important;
@@ -41,6 +51,6 @@ h2 strong {
   border-radius: 10px;
   outline: none;
   background-color: transparent;
-  color: #fff;
+  color: #9333ea;
   font-size: 14px;
 }

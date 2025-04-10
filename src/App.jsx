@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./App.css";
 import Navbar from './components/Navbar';
 import { CiSearch } from "react-icons/ci";
@@ -14,6 +14,7 @@ const App = () => {
   const [word,setWord] = useState("");
   const [result,setResult] = useState("");
   const [loading,setLoading] = useState(false);
+  const [darkMode,setDarkMode] = useState(false);
 
   const changeBgColor = () => {
     let inputBox = document.querySelector(".inputBox");
@@ -37,10 +38,21 @@ const App = () => {
     setLoading(false);
     console.log(response.text);
   }
-    
+
+  useEffect(()=>{
+    const savedTheme = localStorage.getItem("darkMode");
+    if(savedTheme !== null){
+      setDarkMode(savedTheme === 'true');
+    }
+  },[]);
+
+    useEffect(()=>{
+      document.body.classList.toggle("light",!darkMode);
+      localStorage.setItem("darkMode",darkMode);
+    },[darkMode]);
   return (
     <>
-    <Navbar clear={()=>setResult("")} />
+    <Navbar clear={()=>setResult("")} darkMode={darkMode} toggleTheme={() => setDarkMode(prev => !prev)} />
 
     <div className='searchContainer mt-5 px-[250px]'>
       <div className='inputBox'>
